@@ -14,6 +14,7 @@ public class UserEntityMapper {
 
     User toUser(UserEntity userEntity){
         return new User(
+                userEntity.getId(),
                 userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.getEmail()

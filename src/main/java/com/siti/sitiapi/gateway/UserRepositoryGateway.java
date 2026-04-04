@@ -5,6 +5,9 @@ import com.siti.sitiapi.domain.entity.User;
 import com.siti.sitiapi.infrastructure.persistence.UserEntity;
 import com.siti.sitiapi.infrastructure.persistence.UserRepository;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 public class UserRepositoryGateway implements UserGateway {
 
     private final UserRepository userRepository;
@@ -21,4 +24,17 @@ public class UserRepositoryGateway implements UserGateway {
         return userEntityMapper.toUser(userRepository.save(userEntity));
     }
 
+    @Override
+    public List<User> listUsers(){
+        Iterable<UserEntity> usersIterable = userRepository.findAll();
+        return StreamSupport.stream(usersIterable.spliterator(), false)
+                .map(userEntityMapper::toUser)
+                .toList();
+    }
+
+    @Override
+    public void deleteUser(Long id){
+        UserEntity user = new UserEntity();
+        userRepository.deleteById(id);
+    }
 }

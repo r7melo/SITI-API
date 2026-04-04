@@ -1,7 +1,7 @@
 package com.siti.sitiapi.main;
 
 import com.siti.sitiapi.application.gateway.UserGateway;
-import com.siti.sitiapi.application.usecases.CreateUserInteractor;
+import com.siti.sitiapi.application.usecases.UserInteractor;
 import com.siti.sitiapi.gateway.UserEntityMapper;
 import com.siti.sitiapi.gateway.UserRepositoryGateway;
 import com.siti.sitiapi.infrastructure.controllers.mapper.UserDTOMapper;
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class UserConfig {
 
     @Bean
-    CreateUserInteractor createUserCase(UserGateway userGateway){
-        return new CreateUserInteractor(userGateway);
+    UserInteractor UserInteractor(UserGateway userGateway){
+        return new UserInteractor(userGateway);
     }
 
     @Bean
@@ -31,5 +31,7 @@ public class UserConfig {
     UserDTOMapper userDTOMapper(){
         return new UserDTOMapper();
     }
+
+
 
 }
